@@ -3,14 +3,6 @@
  */
 
 import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const inputFile = path.join(__dirname, "input");
-const inputContent = fs.readFileSync(inputFile, "utf8");
 
 const isDigit = (char) => !Number.isNaN(Number(char));
 
@@ -62,11 +54,13 @@ const findLastDigit = (line) => {
   }
 };
 
-let sum = 0;
-for (const line of inputContent.split("\n")) {
-  const firstDigit = findFistDigit(line);
-  const lastDigit = findLastDigit(line);
-  sum += Number(`${firstDigit}${lastDigit}`);
-}
-
-console.log("Sum result:", sum);
+export const main = (filename) => {
+  const fileContent = fs.readFileSync(filename, "utf8");
+  let sum = 0;
+  for (const line of fileContent.split("\n")) {
+    const firstDigit = findFistDigit(line);
+    const lastDigit = findLastDigit(line);
+    sum += Number(`${firstDigit}${lastDigit}`);
+  }
+  return sum;
+};
