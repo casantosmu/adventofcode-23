@@ -4,38 +4,36 @@
 
 import fs from "node:fs";
 
-const colorMaxMap = {
-  red: 12,
-  green: 13,
-  blue: 14,
-};
-
 const getFirstDigit = (string) => string.match(/\d+/)[0];
 
 const getColor = (string) => string.match(/red|green|blue/)[0];
 
-const isPossible = (line) => {
+const getPowerOfMinimumSet = (line) => {
+  const lineMax = {
+    red: 0,
+    green: 0,
+    blue: 0,
+  };
+
   const colorsWithNumber = line.replace(/Game \d+: /, "").split(/, |; /);
 
   for (const colorWithNumber of colorsWithNumber) {
     const color = getColor(colorWithNumber);
     const number = Number(getFirstDigit(colorWithNumber));
 
-    const colorMax = colorMaxMap[color];
-    if (number > colorMax) {
-      return false;
+    const max = lineMax[color];
+    if (number > max) {
+      lineMax[color] = number;
     }
   }
-  return true;
+  return Object.values(lineMax).reduce((acc, cur) => acc * cur);
 };
 
 export const main = (filename) => {
   const fileContent = fs.readFileSync(filename, "utf8");
-  let idsSum = 0;
+  let powersSum = 0;
   for (const line of fileContent.split("\n")) {
-    if (isPossible(line)) {
-      idsSum += Number(getFirstDigit(line));
-    }
+    powersSum += getPowerOfMinimumSet(line);
   }
-  return idsSum;
+  return powersSum;
 };
