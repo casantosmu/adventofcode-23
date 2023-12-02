@@ -2,8 +2,6 @@
  * https://adventofcode.com/2023/day/2
  */
 
-import fs from "node:fs";
-
 const getFirstDigit = (string) => string.match(/\d+/)[0];
 
 const getColor = (string) => string.match(/red|green|blue/)[0];
@@ -29,10 +27,9 @@ const getPowerOfMinimumSet = (line) => {
   return Object.values(lineMax).reduce((acc, cur) => acc * cur);
 };
 
-export const main = (filename) => {
-  const fileContent = fs.readFileSync(filename, "utf8");
+export const main = (input) => {
   let powersSum = 0;
-  for (const line of fileContent.split("\n")) {
+  for (const line of input.split("\n")) {
     powersSum += getPowerOfMinimumSet(line);
   }
   return powersSum;

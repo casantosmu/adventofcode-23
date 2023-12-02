@@ -2,8 +2,6 @@
  * https://adventofcode.com/2023/day/1
  */
 
-import fs from "node:fs";
-
 const isDigit = (char) => !Number.isNaN(Number(char));
 
 const findFistDigit = (line) => {
@@ -24,10 +22,9 @@ const findLastDigit = (line) => {
   }
 };
 
-export const main = (filename) => {
-  const fileContent = fs.readFileSync(filename, "utf8");
+export const main = (input) => {
   let sum = 0;
-  for (const line of fileContent.split("\n")) {
+  for (const line of input.split("\n")) {
     const firstDigit = findFistDigit(line);
     const lastDigit = findLastDigit(line);
     sum += Number(`${firstDigit}${lastDigit}`);

@@ -2,8 +2,6 @@
  * https://adventofcode.com/2023/day/2
  */
 
-import fs from "node:fs";
-
 const colorMaxMap = {
   red: 12,
   green: 13,
@@ -29,10 +27,9 @@ const isPossible = (line) => {
   return true;
 };
 
-export const main = (filename) => {
-  const fileContent = fs.readFileSync(filename, "utf8");
+export const main = (input) => {
   let idsSum = 0;
-  for (const line of fileContent.split("\n")) {
+  for (const line of input.split("\n")) {
     if (isPossible(line)) {
       idsSum += Number(getFirstDigit(line));
     }
