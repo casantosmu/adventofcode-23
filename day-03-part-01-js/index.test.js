@@ -12,6 +12,7 @@ test("passing test", () => {
   const inputPath = path.join(__dirname, "input");
   const input = fs.readFileSync(inputPath, "utf8");
   const expects = 525181;
+
   const result = main(input);
 
   assert.strictEqual(result, expects);
