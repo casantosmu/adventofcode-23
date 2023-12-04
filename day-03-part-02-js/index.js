@@ -2,6 +2,8 @@
  * https://adventofcode.com/2023/day/3
  */
 
+const MAX_ADJACENT_NUMBERS = 2;
+
 const isDigit = (char) => !Number.isNaN(Number(char));
 
 const isGear = (value) => value === "*";
@@ -63,10 +65,10 @@ export const main = (input) => {
     for (const number of numbers) {
       if (isAdjacent(gear, number)) {
         adjacentNumbers.push(Number(number.value));
-        if (adjacentNumbers.length === 2) {
-          sum += adjacentNumbers.reduce((acc, cur) => acc * cur);
-          break;
-        }
+      }
+      if (adjacentNumbers.length === MAX_ADJACENT_NUMBERS) {
+        sum += adjacentNumbers.reduce((acc, cur) => acc * cur);
+        break;
       }
     }
   }
