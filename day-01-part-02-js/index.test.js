@@ -8,7 +8,7 @@ import { main } from "./index.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-test("passing test", () => {
+test("Day 1 - Part 2", () => {
   const inputPath = path.join(__dirname, "input");
   const input = fs.readFileSync(inputPath, "utf8");
   const expects = 54530;
