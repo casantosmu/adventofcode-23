@@ -4,7 +4,7 @@
 
 const isDigit = (char) => !Number.isNaN(Number(char));
 
-const isSymbol = (value) => value !== "." && !isDigit(value);
+const isGear = (value) => value === "*";
 
 const isVertical = (a, b) =>
   a.x < b.x + b.width &&
@@ -23,7 +23,7 @@ const isAdjacent = (a, b) =>
 
 export const main = (input) => {
   const numbers = [];
-  const symbols = [];
+  const gears = [];
 
   input.split("\n").forEach((line, lineIndex) => {
     let currentNumber = null;
@@ -47,8 +47,8 @@ export const main = (input) => {
           numbers.push(currentNumber);
           currentNumber = null;
         }
-      } else if (isSymbol(char)) {
-        symbols.push({
+      } else if (isGear(char)) {
+        gears.push({
           x: charIndex,
           y: lineIndex,
           width: 1,
@@ -58,11 +58,15 @@ export const main = (input) => {
   });
 
   let sum = 0;
-  for (const number of numbers) {
-    for (const symbol of symbols) {
-      if (isAdjacent(number, symbol)) {
-        sum += Number(number.value);
-        break;
+  for (const gear of gears) {
+    const adjacentNumbers = [];
+    for (const number of numbers) {
+      if (isAdjacent(gear, number)) {
+        adjacentNumbers.push(Number(number.value));
+        if (adjacentNumbers.length === 2) {
+          sum += adjacentNumbers.reduce((acc, cur) => acc * cur);
+          break;
+        }
       }
     }
   }
