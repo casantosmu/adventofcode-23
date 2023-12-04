@@ -18,9 +18,8 @@ const isDiagonal = (a, b) =>
   (a.x === b.x + 1 || a.x + a.width + 1 === b.x + b.width) &&
   (a.y === b.y - 1 || a.y === b.y + 1);
 
-const isAdjacent = (a, b) => {
-  return isVertical(a, b) || isHorizontal(a, b) || isDiagonal(a, b);
-};
+const isAdjacent = (a, b) =>
+  isVertical(a, b) || isHorizontal(a, b) || isDiagonal(a, b);
 
 export const main = (input) => {
   const numbers = [];
@@ -43,8 +42,8 @@ export const main = (input) => {
           currentNumber.width++;
         }
 
-        const nextCar = line[charIndex + 1];
-        if (!isDigit(nextCar)) {
+        const nextChar = line[charIndex + 1];
+        if (!isDigit(nextChar)) {
           numbers.push(currentNumber);
           currentNumber = null;
         }
